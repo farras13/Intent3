@@ -14,6 +14,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
     }
 
+    public void composeSmsMessage(String message) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra("sms_body", message);
+        if (intent.resolveActivity(getPackageManager()) != null)
+            startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +30,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialPhoneNumber("0341712500");
+            }
+        });
+        findViewById(R.id.imageViewSMS).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                composeSmsMessage("Pesan dari SMK TELKOM MALANG");
             }
         });
     }
